@@ -9,7 +9,8 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test",
+    "nodetest": "node tests/runner.js"
   },
   "repository": "",
   "engines": {
@@ -19,7 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
-    "ember-cli": "0.2.1",
+    "chai": "^1.9.2",
+    "ember-cli": "^0.2.7",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "0.0.8",
@@ -29,7 +31,11 @@
     "ember-cli-qunit": "0.3.9",
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16",
-    "ember-export-application-global": "^1.0.2"
+    "ember-export-application-global": "^1.0.2",
+    "glob": "^4.0.6",
+    "mocha": "^1.21.5",
+    "mocha-jshint": "0.0.9",
+    "rsvp": "^3.0.17"
   },
   "keywords": [
     "ember-addon"
