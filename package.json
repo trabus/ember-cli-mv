@@ -32,10 +32,15 @@
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16",
     "ember-export-application-global": "^1.0.2",
+    "execSync": "^1.0.2",
+    "fs-extra": "^0.19.0",
+    "git-wrapper": "^0.1.1",
     "glob": "^4.0.6",
     "mocha": "^1.21.5",
     "mocha-jshint": "0.0.9",
-    "rsvp": "^3.0.17"
+    "rsvp": "^3.0.17",
+    "silent-error": "^1.0.0",
+    "tmp-sync": "^1.0.1"
   },
   "keywords": [
     "ember-addon"

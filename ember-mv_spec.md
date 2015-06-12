@@ -59,6 +59,7 @@ ember mv foo-bar.js /app/components/bar/foo-bar.js
     * DEST file does not already exist
   2. check for git
     * check for .git in project
+    * check git version for mv and ls-files support
     * check to see if file is versioned
   3. check dest dir exists
   4. beforeMove hook
