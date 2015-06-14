@@ -24,40 +24,35 @@ describe('verify-file task', function() {
   });
   
   it('checkGitSupport', function(){
-    verifyFileTask.checkGitSupport().then(function(result) {
-      expect(result).to.be.true;
-    });
+    expect(verifyFileTask.checkGitSupport()).to.be.true;
     Promise.resolve().then(function(){
       process.chdir('../');
-      verifyFileTask.checkGitSupport().then(function(result) {
-        expect(result).to.be.false;
-      }).then(function(){
-        process.chdir(root);
-      });
+      expect(verifyFileTask.checkGitSupport()).to.be.false;
+      return;
+    }).then(function(){
+      process.chdir(root);
     });
   });
   
   it('checkSourceGit', function() {
-    verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/foo.js').then(function(result){
-      expect(result).to.be.true;
-    });
-    verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/bar.js').then(function(result){
-      expect(result).to.be.false;
-    });
-  });
-  
-  it('verifySource', function() {
-    var result = verifyFileTask.verifySource();
-    expect(result).to.be.true;
+    expect(verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/foo.js')).to.be.true;
+    expect(verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/bar.js')).to.be.false;
   });
   
   it('checkDestDir', function() {
-    var result = verifyFileTask.checkDestDir();
-    expect(result).to.be.true;
+    expect(verifyFileTask.checkDestDir('./tests/fixtures/smoke-test/bar.js')).to.be.true;
   });
   
   it('checkDestPath', function() {
-    var result = verifyFileTask.checkDestPath();
-    expect(result).to.be.true;
+    expect(verifyFileTask.checkDestPath('./tests/fixtures/smoke-test/bar.js')).to.be.true;
+    expect(verifyFileTask.checkDestPath('./tests/fixtures/smoke-test/foo.js')).to.be.false;
+  });
+  
+  it('verifySource', function() {
+    expect(verifyFileTask.verifySource('./tests/fixtures/smoke-test/foo.js')).to.be.true;
+  });
+  
+  it('verifyDest', function() {
+    expect(verifyFileTask.verifyDest('./tests/fixtures/smoke-test/bar.js')).to.be.true;
   });
 });

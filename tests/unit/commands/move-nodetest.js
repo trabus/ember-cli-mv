@@ -71,7 +71,7 @@ describe('move command', function() {
       runCommand: function(command, args) {
         expect.deepEqual(args, ['./tests/fixtures/smoke-test/foo.js', './tests/fixtures/smoke-test/bar.js']);
       }
-    }).validateAndRun(['./lib/tasks/verify-file.js']);
+    }).validateAndRun(['./tests/fixtures/smoke-test/foo.js', './tests/fixtures/smoke-test/bar.js']);
   });
   
   it('exits for unversioned file', function() {
@@ -86,11 +86,11 @@ describe('move command', function() {
       tasks: tasks,
       settings: {},
       runCommand: function(command, args) {
-        expect.deepEqual(args, []);
+        expect.deepEqual(args, ['nope.js']);
       }
     }).validateAndRun(['nope.js']).then(function() {
       expect(ui.output).to.include('nope.js');
-      expect(ui.output).to.include(' Currently the `ember mv` command requires git.');
+      expect(ui.output).to.include('The source path: nope.js does not exist.');
     }).then(function(){
       process.chdir(root);
       return remove(tmproot);
