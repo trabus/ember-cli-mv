@@ -1,4 +1,4 @@
-ember-mv
+ember-cli-mv
 ===
 [![Build Status](https://travis-ci.org/trabus/ember-cli-mv.svg)](https://travis-ci.org/trabus/ember-cli-mv)
 
