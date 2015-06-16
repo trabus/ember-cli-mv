@@ -61,6 +61,7 @@ ember mv foo-bar.js /app/components/bar/foo-bar.js
     * check for .git in project
     * check git version for mv and ls-files support
     * check to see if file is versioned
+    * `git add <source>` if it isn't versioned
   3. check dest dir exists
   4. beforeMove hook
   5. prompt user

@@ -10,7 +10,9 @@ var Promise       = require('ember-cli/lib/ext/promise');
 var RSVP          = require('rsvp');
 var fs            = require('fs-extra');
 var path          = require('path');
+var exec          = Promise.denodeify(require('child_process').exec);
 var remove        = Promise.denodeify(fs.remove);
+var ensureFile    = Promise.denodeify(fs.ensureFile);
 var root          = process.cwd();
 var tmp           = require('tmp-sync');
 var tmproot       = path.join(root, 'tmp');
@@ -49,11 +51,66 @@ describe('move command', function() {
     };
 
     project = {
-      isEmberCLIProject: function(){
+      isEmberCLIProject: function() {
         return true;
       }
     };
   });
+  
+  function setupGit() {
+    return exec('git --version')
+      .then(function(){
+        return exec('git rev-parse --is-inside-work-tree', { encoding: 'utf8' })
+          .then(function(result) {
+            console.log('result',result)
+            return;
+            // return exec('git init');
+          })
+          .catch(function(e){
+            return exec('git init');
+          });
+      });
+  }
+  
+  function generateFile(path) {
+    return ensureFile(path);
+  }
+  
+  function addFileToGit(path) {
+    return ensureFile(path)
+      .then(function() {
+        return exec('git add .');
+      });
+  }
+  
+  function addFilesToGit(files) {
+    var filesToAdd = files.map(addFileToGit);
+    return RSVP.all(filesToAdd);
+  }
+  
+  function setupForMove() {
+    return setupTmpDir()
+      // .then(setupGit)
+      .then(addFilesToGit.bind(null,['foo.js','bar.js']));
+  }
+  
+  function setupTmpDir() {
+    return Promise.resolve()
+      .then(function(){
+        tmpdir = tmp.in(tmproot);
+        process.chdir(tmpdir);
+        return tmpdir;
+      });
+  }
+  
+  function cleanupTmpDir() {
+    return Promise.resolve()
+      .then(function(){
+        process.chdir(root);
+        return remove(tmproot);
+      });
+  }
+  
   /*
   afterEach(function() {
     process.chdir(root);
@@ -75,26 +132,47 @@ describe('move command', function() {
   });
   
   it('exits for unversioned file', function() {
-    tmpdir = tmp.in(tmproot);
-    process.chdir(tmpdir);
-    fs.writeFileSync('foo.js','foo');  
-    return new CommandUnderTest({
-      ui: ui,
-      analytics: analytics,
-      project: project,
-      environment: { },
-      tasks: tasks,
-      settings: {},
-      runCommand: function(command, args) {
-        expect.deepEqual(args, ['nope.js']);
-      }
-    }).validateAndRun(['nope.js']).then(function() {
-      expect(ui.output).to.include('nope.js');
-      expect(ui.output).to.include('The source path: nope.js does not exist.');
-    }).then(function(){
-      process.chdir(root);
-      return remove(tmproot);
-    });
+    return setupTmpDir()
+      .then(function(){
+        fs.writeFileSync('foo.js','foo');  
+        return new CommandUnderTest({
+          ui: ui,
+          analytics: analytics,
+          project: project,
+          environment: { },
+          tasks: tasks,
+          settings: {},
+          runCommand: function(command, args) {
+            expect.deepEqual(args, ['nope.js']);
+          }
+        }).validateAndRun(['nope.js']).then(function() {
+          expect(ui.output).to.include('nope.js');
+          expect(ui.output).to.include('The source path: nope.js does not exist.');
+        });
+      })
+      .then(cleanupTmpDir);
+  });
+  
+  it('can move a file', function() {
+    return setupForMove().
+      then(function(result) {
+        console.log('result',result);
+        return new CommandUnderTest({
+          ui: ui,
+          analytics: analytics,
+          project: project,
+          environment: { },
+          tasks: tasks,
+          settings: {},
+          runCommand: function(command, args) {
+            expect.deepEqual(args, ['foo.js', 'foo-bar.js']);
+          }
+        }).validateAndRun(['foo.js', 'foo-bar.js']).then(function() {
+          expect(ui.output).to.include('foo.js');
+          // expect(ui.output).to.include('The source path: nope.js does not exist.');
+        });
+      })
+      .then(cleanupTmpDir);
   });
   
 });
