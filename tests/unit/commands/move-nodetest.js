@@ -118,6 +118,7 @@ describe('move command', function() {
   });
   */
   /*
+  //TODO: fix so this isn't moving the fixtures
   it('smoke test', function() {
     return new CommandUnderTest({
       ui: ui,
