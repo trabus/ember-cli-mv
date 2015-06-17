@@ -117,6 +117,7 @@ describe('move command', function() {
     return remove(tmproot);
   });
   */
+  /*
   it('smoke test', function() {
     return new CommandUnderTest({
       ui: ui,
@@ -130,6 +131,7 @@ describe('move command', function() {
       }
     }).validateAndRun(['./tests/fixtures/smoke-test/foo.js', './tests/fixtures/smoke-test/bar.js']);
   });
+  */
   
   it('exits for unversioned file', function() {
     return setupTmpDir()

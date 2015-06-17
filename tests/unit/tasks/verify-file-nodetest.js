@@ -35,24 +35,30 @@ describe('verify-file task', function() {
   });
   
   it('checkSourceGit', function() {
-    expect(verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/foo.js')).to.be.true;
-    expect(verifyFileTask.checkSourceGit('./tests/fixtures/smoke-test/bar.js')).to.be.false;
+    return verifyFileTask.checkSourceGit(path.join(root,'/tests/fixtures/smoke-test/foo.js'))
+      .then(function(result){
+        expect(result).to.be.true;
+        return;
+      })
+      .then(function(){
+        return verifyFileTask.checkSourceGit(paht.join(root,'/tests/fixtures/smoke-test/bar.js'))
+        .then(function(result){
+          expect(result).to.be.false;
+          return;
+        });
+      });
   });
   
   it('checkDestDir', function() {
     expect(verifyFileTask.checkDestDir('./tests/fixtures/smoke-test/bar.js')).to.be.true;
   });
   
-  it('checkDestPath', function() {
-    expect(verifyFileTask.checkDestPath('./tests/fixtures/smoke-test/bar.js')).to.be.true;
-    expect(verifyFileTask.checkDestPath('./tests/fixtures/smoke-test/foo.js')).to.be.false;
+  it('verifyDestPath', function() {
+    expect(verifyFileTask.verifyDestPath('./tests/fixtures/smoke-test/bar.js')).to.be.true;
+    expect(verifyFileTask.verifyDestPath('./tests/fixtures/smoke-test/foo.js')).to.be.false;
   });
   
-  it('verifySource', function() {
-    expect(verifyFileTask.verifySource('./tests/fixtures/smoke-test/foo.js')).to.be.true;
-  });
-  
-  it('verifyDest', function() {
-    expect(verifyFileTask.verifyDest('./tests/fixtures/smoke-test/bar.js')).to.be.true;
+  it('verifySourcePath', function() {
+    expect(verifyFileTask.verifySourcePath('./tests/fixtures/smoke-test/foo.js')).to.be.true;
   });
 });
