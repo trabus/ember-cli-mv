@@ -48,6 +48,7 @@
     "ember-addon"
   ],
   "dependencies": {
+    "recast": "^0.10.12",
     "ember-cli-babel": "^4.0.0"
   },
   "ember-addon": {
