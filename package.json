@@ -48,8 +48,11 @@
     "ember-addon"
   ],
   "dependencies": {
+    "ember-cli-babel": "^4.0.0",
+    "exists-sync": "0.0.3",
+    "lodash": "^3.9.3",
     "recast": "^0.10.12",
-    "ember-cli-babel": "^4.0.0"
+    "walkdir": "0.0.9"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
