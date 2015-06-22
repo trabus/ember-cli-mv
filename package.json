@@ -50,6 +50,7 @@
   "dependencies": {
     "ember-cli-babel": "^4.0.0",
     "exists-sync": "0.0.3",
+    "inflection": "^1.7.1",
     "lodash": "^3.9.3",
     "recast": "^0.10.12",
     "walkdir": "0.0.9"
