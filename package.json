@@ -12,7 +12,10 @@
     "test": "ember test",
     "nodetest": "node tests/runner.js"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trabus/ember-cli-rename.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -48,7 +51,6 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^4.0.0",
     "exists-sync": "0.0.3",
     "inflection": "^1.7.1",
     "lodash": "^3.9.3",
