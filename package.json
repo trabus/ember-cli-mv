@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-mv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -51,6 +51,7 @@
     "ember-addon"
   ],
   "dependencies": {
+    "ember-cli-babel": "^4.0.0",
     "exists-sync": "0.0.3",
     "inflection": "^1.7.1",
     "lodash": "^3.9.3",
