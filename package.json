@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-mv",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -24,8 +24,6 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
     "chai": "^1.9.2",
-    "chalk": "^1.0.0",
-    "debug": "^2.2.0",
     "ember-cli": "^0.2.7",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-content-security-policy": "0.4.0",
@@ -37,21 +35,21 @@
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16",
     "ember-export-application-global": "^1.0.2",
-    "execSync": "^1.0.2",
-    "fs-extra": "^0.19.0",
-    "git-wrapper": "^0.1.1",
     "glob": "^4.0.6",
     "mocha": "^1.21.5",
     "mocha-jshint": "0.0.9",
     "rsvp": "^3.0.17",
-    "silent-error": "^1.0.0",
     "tmp-sync": "^1.0.1"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^4.0.0",
+    "chalk": "^1.0.0",
+    "debug": "^2.2.0",
+    "silent-error": "^1.0.0",
+    "execSync": "^1.0.2",
+    "fs-extra": "^0.19.0",
     "exists-sync": "0.0.3",
     "inflection": "^1.7.1",
     "lodash": "^3.9.3",
